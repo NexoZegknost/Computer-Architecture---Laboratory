@@ -3,3 +3,4 @@
 *.asm text eol=lf
 *.pdf binary
 *.png binary
+*.jar binary
