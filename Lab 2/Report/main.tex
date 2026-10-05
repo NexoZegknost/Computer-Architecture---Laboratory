@@ -1,0 +1,33 @@
+\documentclass[12pt,a4paper]{article}
+
+% Vietnamese support
+\usepackage{iftex}
+\ifPDFTeX
+  % pdfLaTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T5]{fontenc}
+  \usepackage{lmodern}
+\else
+  % XeLaTeX / LuaLaTeX
+  \usepackage{fontspec}
+\fi
+
+\input{config/packages}
+\input{config/info}
+\input{config/style}
+
+\begin{document}
+
+\input{sections/titlepage}
+
+% Table of contents
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+
+% Content
+\input{sections/introduction}
+\input{sections/exercises}
+\input{sections/conclusion}
+
+\end{document}

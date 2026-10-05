@@ -1,0 +1,5 @@
+* text=auto
+*.tex text eol=lf
+*.asm text eol=lf
+*.pdf binary
+*.png binary

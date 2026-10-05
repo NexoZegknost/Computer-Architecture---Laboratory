@@ -1,0 +1,21 @@
+% !TEX root = ../../main.tex
+\subsection{Exercise 2}
+\task{Requirement}
+Input an array with 5 elements (prompts: ``Please input element 0:'',
+``Please input element 1:'', \dots), then print the element at the index chosen
+by the user (0 to 4) with the prompt ``Please enter index:''.
+For example, with the array \textbf{5, 10, 15, 20, 25}, input \textbf{1}
+gives \textbf{10}, input \textbf{4} gives \textbf{25}.
+
+\task{Idea}
+The address of the selected element is computed arithmetically:
+\[
+  \text{address} = \text{base} + \text{index} \times 4
+\]
+Describe your approach here.
+
+\task{Source code}
+\lstinputlisting[caption={Exercise 2 -- \texttt{Exercise2.asm}}]{Exercise2.asm}
+
+\task{Result}
+\screenshot{images/ex2.png}{Output of Exercise 2 on MARS}

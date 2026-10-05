@@ -1,0 +1,19 @@
+# LaTeX build output
+build/
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.xdv
+# PDF compiled outside build/
+Report/main.pdf
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store

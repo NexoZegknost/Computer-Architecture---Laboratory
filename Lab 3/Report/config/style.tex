@@ -1,0 +1,67 @@
+% !TEX root = ../main.tex
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{%
+  \raisebox{-0.35\height}{\includegraphics[height=0.75cm]{images/logo-bk.png}}%
+  \hspace{0.25cm}%
+  \begin{tabular}[c]{@{}l@{}}
+    \texttt{Ho Chi Minh City University of Technology}\\
+    \texttt{Faculty of Computer Science and Engineering}
+  \end{tabular}}
+\fancyfoot[L]{\scriptsize\ttfamily
+  \begin{tabular}[b]{@{}l@{}}
+    Exercise for Computer Architecture\\
+    Academic year \AcademicYear
+  \end{tabular}}
+\fancyfoot[R]{\scriptsize\ttfamily Page \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codekw}{RGB}{0,0,180}
+\definecolor{codereg}{RGB}{160,0,160}
+\definecolor{codestr}{RGB}{200,60,0}
+
+\lstdefinelanguage{MIPS}{
+  morekeywords={add,addu,addi,addiu,sub,subu,mul,mult,multu,div,divu,
+    mfhi,mflo,mthi,mtlo,and,andi,or,ori,xor,xori,nor,sll,srl,sra,sllv,srlv,srav,
+    slt,slti,sltu,sltiu,lw,sw,lb,lbu,sb,lh,lhu,sh,lui,la,li,move,syscall,
+    beq,bne,bgt,blt,bge,ble,beqz,bnez,j,jal,jr,jalr,nop,neg,not},
+  morekeywords=[2]{.data,.text,.globl,.word,.byte,.half,.asciiz,.ascii,.space,.align},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+
+\lstset{
+  language=MIPS,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekw}\bfseries,
+  keywordstyle=[2]\color{codereg}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestr},
+  backgroundcolor=\color{codebg},
+  numbers=left, numberstyle=\tiny\color{gray}, numbersep=8pt,
+  frame=single, rulecolor=\color{gray!60},
+  breaklines=true, showstringspaces=false,
+  tabsize=4, columns=fullflexible, keepspaces=true,
+  xleftmargin=1.5em, framexleftmargin=1.2em,
+  captionpos=b,
+}
+\renewcommand{\lstlistingname}{Code}
+\lstset{inputpath=../Implementation}
+\input{config/vietnamese-listings}
+
+\newcommand{\screenshot}[3][0.85\textwidth]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{#2}{\includegraphics[width=#1]{#2}}{%
+      \fbox{\parbox[c][4cm][c]{#1}{\centering\ttfamily\small
+        [ Screenshot: \detokenize{#2} ]}}}
+    \caption{#3}
+  \end{figure}}
+
+\setlength{\parskip}{4pt}
+
+\newcommand{\task}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak}

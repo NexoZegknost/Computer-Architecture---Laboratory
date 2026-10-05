@@ -1,0 +1,42 @@
+% !TEX root = ../main.tex
+% Title page
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  % Double border
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[line width=2.5pt]
+      ([xshift=1.7cm,yshift=-2.3cm]current page.north west) rectangle
+      ([xshift=-1.7cm,yshift=2.3cm]current page.south east);
+    \draw[line width=0.6pt]
+      ([xshift=1.95cm,yshift=-2.55cm]current page.north west) rectangle
+      ([xshift=-1.95cm,yshift=2.55cm]current page.south east);
+  \end{tikzpicture}
+
+  \begin{center}
+    \vspace*{1.2cm}
+    {\large\textsc{Ho Chi Minh City University of Technology}}\\[0.6cm]
+    \includegraphics[width=3.2cm]{images/logo-bk.png}\\[0.6cm]
+    {\large\textsc{Faculty of Computer Science and Engineering}}\\
+    {\large\textsc{Course: Computer Architecture Lab (CO2008)}}\\[2cm]
+
+    \begin{minipage}{0.6\textwidth}
+      {\color{blue}\rule{\linewidth}{0.6pt}}\\[0.3cm]
+      {\color{blue}\bfseries\Huge Lab \LabNumber}\\[0.4cm]
+      {\color{blue}\bfseries\Large \LabTitle}\\[-0.1cm]
+      {\color{blue}\rule{\linewidth}{0.6pt}}
+    \end{minipage}\\[1.6cm]
+
+    % Student information
+    \begin{tabular}{rl}
+      \textbf{Student:}    & \StudentName \\
+      \textbf{Student ID:} & \StudentID \\
+      \textbf{Class:}      & \ClassGroup \\
+      \textbf{Instructor:} & \Instructor
+    \end{tabular}
+
+    \vfill
+    \ReportDate
+    \vspace*{0.8cm}
+  \end{center}
+\end{titlepage}
+\hypersetup{pageanchor=true}

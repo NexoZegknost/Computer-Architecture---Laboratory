@@ -1,0 +1,26 @@
+% !TEX root = ../../main.tex
+\subsection{Exercise 3}
+\task{Requirement}
+Print out the result of
+\[
+  F = \frac{(a+10)\times(b-d)\times(c-2\times a)}{a+b+c}
+\]
+where $a$, $b$, $c$, $d$ are integers inserted in this exact order
+(prompts: ``Insert a: '', ``Insert b: '', \dots), $a+b+c \neq 0$.
+Both the quotient and the remainder must be printed.
+
+\task{Idea}
+Describe your approach here (\texttt{mul}, \texttt{div}, \texttt{mflo}, \texttt{mfhi}).
+
+\task{Verification}
+With $a=3$, $b=4$, $c=5$, $d=6$:
+\[
+  F = \frac{13 \times (-2) \times (-1)}{12} = \frac{26}{12}
+  \;\Rightarrow\; \text{quotient } 2,\ \text{remainder } 2.
+\]
+
+\task{Source code}
+\lstinputlisting[caption={Exercise 3 -- \texttt{Exercise3.asm}}]{Exercise3.asm}
+
+\task{Result}
+\screenshot{images/ex3.png}{Output of Exercise 3 on MARS}
