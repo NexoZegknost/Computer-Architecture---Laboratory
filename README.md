@@ -5,8 +5,6 @@
 Laboratory work for the **Computer Architecture** course at Ho Chi Minh City University of Technology (HCMUT), VNU-HCM.
 Each lab consists of **MIPS assembly** programs (run on the MARS simulator) and a **LaTeX report**.
 
-**Student:** Nguyễn Huỳnh Hữu Đức
-
 ## Labs
 
 | Lab | Topic | Report |
