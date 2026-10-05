@@ -6,6 +6,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   mips:
     name: Assemble MIPS
@@ -69,7 +73,7 @@ jobs:
           done < <(find . -path '*/Report/main.tex' -print0)
           exit $status
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         if: always()
         with:
           name: reports
