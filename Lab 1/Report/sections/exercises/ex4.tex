@@ -6,10 +6,13 @@ user (prompt: ``Please enter a positive integer less than 16: '').
 For example, input \textbf{10} gives \textbf{Its binary form is: 1010}.
 
 \task{Idea}
-Each bit $b_i$ ($i = 3,2,1,0$) is extracted by shifting and masking:
+Since only arithmetic instructions are allowed, each bit $b_i$ ($i = 3,2,1,0$)
+is obtained by integer division:
 \[
-  b_i = (n \gg i) \;\&\; 1
+  b_i = \left\lfloor \frac{n}{2^i} \right\rfloor \bmod 2
 \]
+Dividing by $8$, $4$, $2$ with \texttt{div} gives the quotient in \texttt{LO}
+and the remainder in \texttt{HI} (\texttt{mflo}, \texttt{mfhi}).
 Describe your approach here.
 
 \task{Source code}
