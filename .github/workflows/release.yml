@@ -1,0 +1,44 @@
+name: Release
+
+# Publish a release with tag "lab-N" to attach the report PDF
+# and the MIPS source code of folder "Lab N".
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve lab folder
+        run: |
+          tag="${{ github.event.release.tag_name }}"
+          n="${tag#lab-}"
+          echo "LAB_DIR=Lab $n" >> "$GITHUB_ENV"
+          echo "LAB_NAME=Lab-$n" >> "$GITHUB_ENV"
+          test -d "Lab $n" || { echo "::error::Folder 'Lab $n' not found (tag must be lab-N)"; exit 1; }
+
+      - name: Build report
+        run: |
+          cd "$LAB_DIR/Report"
+          latexmk -xelatex -interaction=nonstopmode -halt-on-error -outdir=build main.tex
+          cp build/main.pdf "$GITHUB_WORKSPACE/$LAB_NAME-Report.pdf"
+
+      - name: Package source code
+        run: |
+          apt-get update -qq && apt-get install -y -qq zip >/dev/null
+          cd "$LAB_DIR"
+          zip -r "$GITHUB_WORKSPACE/$LAB_NAME-Implementation.zip" Implementation
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          files: |
+            ${{ env.LAB_NAME }}-Report.pdf
+            ${{ env.LAB_NAME }}-Implementation.zip
