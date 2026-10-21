@@ -1,0 +1,18 @@
+% !TEX root = ../../main.tex
+\subsection{Exercise 3}
+\task{Requirement}
+Write a MIPS program to find the second largest element in a 10-elements
+integer array. The program is also required to find all their indexes. Print
+the value and all of its indexes. The elements of the array must be inserted
+by the user after the prompt: ``Please insert a element:''
+
+For example, if the array is \textbf{1, 2, 7, -7, 3, 7, 4, 6, 8, 7} the output
+should be \textbf{Second largest value is 7, found in index 2, 5, 9}.
+
+\task{Test cases}
+\testcase{3}{1}{\texttt{1, 2, 7, -7, 3, 7, 4, 6, 8, 7}}%
+  {\texttt{Second largest value is 7, found in index 2, 5, 9}}
+\testcase{3}{2}{\texttt{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}}%
+  {\texttt{Second largest value is 9, found in index 1}}
+\testcase{3}{3}{\texttt{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}}%
+  {\texttt{There is no second largest value.}}

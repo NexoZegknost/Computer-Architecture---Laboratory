@@ -1,0 +1,16 @@
+% !TEX root = ../../main.tex
+\subsection{Exercise 2}
+\task{Requirement}
+Write a MIPS program that requests two positive integers called a and b
+from the user (please check if they are positive or not). The program then
+prints their greatest common divisor (GCD) and lowest common multiple
+(LCM) utilizing recursive. The input numbers should be after the prompt:
+``a = '' and ``b = ''. For example, if the user input \textbf{a=6} and \textbf{b=45}, the result
+should be \textbf{GCD=3, LCM=90}.
+
+\task{Test cases}
+\testcase{2}{1}{$a = 6$, $b = 45$}{\texttt{GCD=3, LCM=90}}
+\testcase{2}{2}{$a = 12$, $b = 18$}{\texttt{GCD=6, LCM=36}}
+\testcase{2}{3}{$a = -4$ (rejected), $a = 8$, $b = 0$ (rejected), $b = 12$}%
+  {two messages \texttt{Invalid input. Please enter a positive integer.},
+   then \texttt{GCD=4, LCM=24}}
