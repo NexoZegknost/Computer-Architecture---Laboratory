@@ -67,4 +67,4 @@ java -jar tools/Mars45.jar nc a "Lab 1/Implementation/Exercise1.asm"
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
 | **CI** | Every push to `main` | Assembles every `.asm` file with MARS and builds every report; PDFs are available under *Artifacts* |
-| **Release** | Publishing a release tagged `lab-N` | Attaches `Lab-N-Report.pdf` and `Lab-N-Implementation.zip` to the release |
+| **Release** | Publishing a release tagged `lab-N` | Attaches the submission package `<IDs>_LabN.zip` (report PDF + `ExerciseK.asm`) and the report PDF to the release |

@@ -9,18 +9,10 @@ where $a$, $b$, $c$, $d$ are integers inserted in this exact order
 (prompts: ``Insert a: '', ``Insert b: '', \dots), $a+b+c \neq 0$.
 Both the quotient and the remainder must be printed.
 
-\task{Idea}
-Describe your approach here (\texttt{mul}, \texttt{div}, \texttt{mflo}, \texttt{mfhi}).
-
-\task{Verification}
-With $a=3$, $b=4$, $c=5$, $d=6$:
-\[
-  F = \frac{13 \times (-2) \times (-1)}{12} = \frac{26}{12}
-  \;\Rightarrow\; \text{quotient } 2,\ \text{remainder } 2.
-\]
-
-\task{Source code}
-\lstinputlisting[caption={Exercise 3 -- \texttt{Exercise3.asm}}]{Exercise3.asm}
-
-\task{Result}
-\screenshot{images/ex3.png}{Output of Exercise 3 on MARS}
+\task{Test cases}
+\testcase{3}{1}{$a=3$, $b=4$, $c=5$, $d=6$}{\texttt{F = 2, remainder 2}
+  \hfill $\left(\frac{13 \times (-2) \times (-1)}{12} = \frac{26}{12}\right)$}
+\testcase{3}{2}{$a=0$, $b=7$, $c=5$, $d=2$}{\texttt{F = 20, remainder 10}
+  \hfill $\left(\frac{10 \times 5 \times 5}{12} = \frac{250}{12}\right)$}
+\testcase{3}{3}{$a=1$, $b=2$, $c=3$, $d=4$}{\texttt{F = -3, remainder -4}
+  \hfill $\left(\frac{11 \times (-2) \times 1}{6} = \frac{-22}{6}\right)$}

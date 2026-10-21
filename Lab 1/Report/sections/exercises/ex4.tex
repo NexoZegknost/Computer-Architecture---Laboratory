@@ -5,18 +5,7 @@ Print the 4-bit binary value of a positive integer less than 16 entered by the
 user (prompt: ``Please enter a positive integer less than 16: '').
 For example, input \textbf{10} gives \textbf{Its binary form is: 1010}.
 
-\task{Idea}
-Since only arithmetic instructions are allowed, each bit $b_i$ ($i = 3,2,1,0$)
-is obtained by integer division:
-\[
-  b_i = \left\lfloor \frac{n}{2^i} \right\rfloor \bmod 2
-\]
-Dividing by $8$, $4$, $2$ with \texttt{div} gives the quotient in \texttt{LO}
-and the remainder in \texttt{HI} (\texttt{mflo}, \texttt{mfhi}).
-Describe your approach here.
-
-\task{Source code}
-\lstinputlisting[caption={Exercise 4 -- \texttt{Exercise4.asm}}]{Exercise4.asm}
-
-\task{Result}
-\screenshot{images/ex4.png}{Output of Exercise 4 on MARS}
+\task{Test cases}
+\testcase{4}{1}{\texttt{10}}{\texttt{Its binary form is: 1010}}
+\testcase{4}{2}{\texttt{5}}{\texttt{Its binary form is: 0101}}
+\testcase{4}{3}{\texttt{15}}{\texttt{Its binary form is: 1111}}

@@ -1,7 +1,7 @@
 name: Release
 
-# Publish a release with tag "lab-N" to attach the report PDF
-# and the MIPS source code of folder "Lab N".
+# Publish a release with tag "lab-N" to attach the submission package of
+# folder "Lab N": <IDs>_LabN.zip (report PDF + ExerciseK.asm) and the PDF.
 on:
   release:
     types: [published]
@@ -32,17 +32,24 @@ jobs:
         run: |
           cd "$LAB_DIR/Report"
           latexmk -xelatex -interaction=nonstopmode -halt-on-error -outdir=build main.tex
-          cp build/main.pdf "$GITHUB_WORKSPACE/$LAB_NAME-Report.pdf"
 
-      - name: Package source code
+      - name: Package submission
         run: |
           apt-get update -qq && apt-get install -y -qq zip >/dev/null
-          cd "$LAB_DIR"
-          zip -r "$GITHUB_WORKSPACE/$LAB_NAME-Implementation.zip" Implementation
+          n="${LAB_NAME#Lab-}"
+          # Student ID from \StudentID in info.tex
+          ids=$(grep -o '\\StudentID}{[0-9]*}' "$LAB_DIR/Report/config/info.tex" | grep -o '[0-9]\+')
+          pkg="${ids}_Lab${n}"
+          mkdir -p "pkg/$pkg"
+          cp "$LAB_DIR/Report/build/main.pdf" "pkg/$pkg/${pkg}_Report.pdf"
+          cp "$LAB_DIR"/Implementation/Exercise*.asm "pkg/$pkg/"
+          (cd "pkg/$pkg" && zip "$GITHUB_WORKSPACE/$pkg.zip" ./*)
+          cp "pkg/$pkg/${pkg}_Report.pdf" "$GITHUB_WORKSPACE/"
+          echo "PKG=$pkg" >> "$GITHUB_ENV"
 
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.release.tag_name }}
           files: |
-            ${{ env.LAB_NAME }}-Report.pdf
-            ${{ env.LAB_NAME }}-Implementation.zip
+            ${{ env.PKG }}.zip
+            ${{ env.PKG }}_Report.pdf

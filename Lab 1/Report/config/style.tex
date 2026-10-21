@@ -65,3 +65,23 @@
 \setlength{\parskip}{4pt}
 
 \newcommand{\task}[1]{\par\medskip\noindent\textbf{#1}\par\nopagebreak}
+
+% \testcase{exercise}{case}{input}{expected output}
+% Screenshot of the actual run: images/ex<exercise>_tc<case>.png
+% Each test case is kept on a single page.
+\newcommand{\testcase}[4]{%
+  \par\medskip\noindent
+  \begin{minipage}{\linewidth}
+    \textbf{\textit{Test case #2}}
+    \begin{itemize}[leftmargin=1.5em, itemsep=2pt, topsep=2pt]
+      \item \textbf{Input:} #3
+      \item \textbf{Expected output:} #4
+      \item \textbf{Output:}
+    \end{itemize}
+    \centering
+    \IfFileExists{images/ex#1_tc#2.png}%
+      {\includegraphics[width=0.75\linewidth]{images/ex#1_tc#2.png}}%
+      {\fbox{\parbox[c][3cm][c]{0.75\linewidth}{\centering\ttfamily\small
+        [ Screenshot: images/ex#1\_tc#2.png ]}}}
+    \captionof{figure}{Exercise #1 -- Test case #2}
+  \end{minipage}\par}

@@ -4,12 +4,9 @@
 Write a MIPS program that takes a name as a string and print out a
 ``Hello $<$name$>$!''. For example, if the input is \textbf{John},
 then the output should be \textbf{Hello, John!}.
+The exclamation mark must be on the same line as ``Hello, $<$name$>$''.
 
-\task{Idea}
-Describe your approach here.
-
-\task{Source code}
-\lstinputlisting[caption={Exercise 1 -- \texttt{Exercise1.asm}}]{Exercise1.asm}
-
-\task{Result}
-\screenshot{images/ex1.png}{Output of Exercise 1 on MARS}
+\task{Test cases}
+\testcase{1}{1}{\texttt{John}}{\texttt{Hello, John!}}
+\testcase{1}{2}{\texttt{Nguyen Van An}}{\texttt{Hello, Nguyen Van An!}}
+\testcase{1}{3}{\texttt{Lan}}{\texttt{Hello, Lan!}}
