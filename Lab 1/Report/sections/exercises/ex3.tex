@@ -1,13 +1,17 @@
 % !TEX root = ../../main.tex
 \subsection{Exercise 3}
 \task{Requirement}
-Print out the result of
+Write a MIPS program to print out the result of F:
 \[
   F = \frac{(a+10)\times(b-d)\times(c-2\times a)}{a+b+c}
 \]
-where $a$, $b$, $c$, $d$ are integers inserted in this exact order
-(prompts: ``Insert a: '', ``Insert b: '', \dots), $a+b+c \neq 0$.
-Both the quotient and the remainder must be printed.
+where a, b, c, and d are integers inserted by the user. Note that a, b, c,
+and d are inserted in this exact order. Moreover, ``a+b+c'' is assume to not
+equal to 0. The output of division should print both the quotient and the
+remainder.\\
+The input prompts should be as such: ``Insert a: '', ``Insert b: '', etc.\\
+For example, if the input is 3, 4, 5, 6 then the output should be: \textbf{F = 2,
+remainder 2}.
 
 \task{Test cases}
 \testcase{3}{1}{$a=3$, $b=4$, $c=5$, $d=6$}{\texttt{F = 2, remainder 2}
