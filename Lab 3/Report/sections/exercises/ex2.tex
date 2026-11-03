@@ -1,0 +1,19 @@
+% !TEX root = ../../main.tex
+\subsection{Exercise 2}
+\task{Requirement}
+Write a MIPS program to calculate the following integral:
+\begin{equation}
+  f(x) = \int_{v}^{u} \frac{ax^6 + bx^5 + cx}{d^4 + e^3}\,dx
+\end{equation}
+where u, v, a, b, c, d, and e are floating-point numbers chosen by the user.
+The user will input the floating-point numbers after the prompts: ``Please
+insert a: '', ``Please insert b: '', etc. For example, user inserted \textbf{u=1, v=2,
+a=3, b=4, c=5, d=6, e=7} then the result should be: \textbf{-0.0634}
+
+\task{Test cases}
+\testcase{2}{1}{$u = 1$, $v = 2$, $a = 3$, $b = 4$, $c = 5$, $d = 6$, $e = 7$}%
+  {\texttt{Result: -0.063409746}}
+\testcase{2}{2}{$u = 1$, $v = -1$, $a = 7$, $b = 6$, $c = 2$, $d = 1$, $e = 1$}%
+  {\texttt{Result: 1.0}}
+\testcase{2}{3}{$u = 3$, $v = 0$, $a = 1$, $b = 2$, $c = 3$, $d = 1$, $e = -1$}%
+  {\texttt{The denominator d\^{}4 + e\^{}3 is zero, the integral can not be calculated.}}

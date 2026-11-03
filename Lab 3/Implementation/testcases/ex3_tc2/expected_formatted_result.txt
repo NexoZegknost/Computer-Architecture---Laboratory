@@ -1,0 +1,6 @@
+-----Student personal information-----
+Name: Nguyen Van An
+ID: 2512345
+Address: 268 Ly Thuong Kiet St Ward 14 District 10 HCMC
+Age: 19
+Religion: Buddhism

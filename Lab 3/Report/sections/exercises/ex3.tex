@@ -1,0 +1,132 @@
+% !TEX root = ../../main.tex
+\subsection{Exercise 3}
+\task{Requirement}
+To allocate memory, please refer to the following syscall:
+\begin{lstlisting}
+    li $v0, 9   # system call code for dynamic allocation
+    li $a0, 24  # $a0 contains number of bytes to allocate
+\end{lstlisting}
+After the above system call, \texttt{\$v0} contains the first address in heap memory
+that is allocated. Then, accessing the allocated memory can be done by
+\texttt{lw}/\texttt{sw}, for example:
+\begin{lstlisting}
+    # Trying to write to allocated space
+    addi $t0, $zero, 2021
+    sw $t0, 0($v0)
+\end{lstlisting}
+The followings are instructions used to access a file (open/close/read/write):
+\begin{lstlisting}
+    # Sample MIPS program that writes to a new file.
+    # by Kenneth Vollmar and Pete Sanderson
+    .data
+    fout: .asciiz "testout.txt" # filename for output
+    msg1: .asciiz "Before read: "
+    msg2: .asciiz "After read: "
+    buffer_write: .asciiz "The quick brown fox jumps over the lazy dog.\n"
+    buffer_read: .asciiz "---------------------------------\n"
+    .text
+    #######################################################
+    # Open (for writing) a file that does not exist
+    li $v0, 13      # system call for open file
+    la $a0, fout    # output file name
+    li $a1, 1       # Open for writing (flags are 0: read, 1: write)
+    li $a2, 0       # mode is ignored
+    syscall         # open a file (file descriptor returned in $v0)
+    move $s6, $v0   # save the file descriptor
+    #######################################################
+    # Write to file just opened
+    li $v0, 15      # system call for write to file
+    move $a0, $s6   # file descriptor
+    la $a1, buffer_write # address of buffer from which to write
+    li $a2, 44      # hardcoded buffer length
+    syscall         # write to file
+    #######################################################
+    # Close the file
+    li $v0, 16      # system call for close file
+    move $a0, $s6   # file descriptor to close
+    syscall         # close file
+    #######################################################
+    #######################################################
+    # Open (for reading) a file
+    li $v0, 13      # system call for open file
+    la $a0, fout    # input file name
+    li $a1, 0       # Open for reading (flags are 0: read, 1: write)
+    li $a2, 0       # mode is ignored
+    syscall         # open a file (file descriptor returned in $v0)
+    move $s6, $v0   # save the file descriptor
+    #######################################################
+    # Read from file
+    li $v0, 14      # system call for read
+    move $a0, $s6   # file descriptor
+    la $a1, buffer_read # address of buffer read
+    li $a2, 44      # hardcoded buffer length
+    syscall         # read file
+\end{lstlisting}
+Please do the followings:
+\begin{sloppypar}
+\begin{enumerate}
+  \item Manually create a line of text in format
+        \texttt{<name>,<id>,<address>,<age>,<religion>} in a text file by using a
+        text editor. The file must be named: \texttt{raw\_input.txt}.
+        An example text should be: \texttt{Davy Jones,2251234,168 Ly Thuong
+        Kiet St District 10 Ward 14 HCMC,69,None}
+  \item Open the file to read the text you inserted.
+  \item Declare a string in the heap memory with dynamically allocated memory.
+        The size of the string must be large enough to store the text in the
+        text file.
+  \item Copy the line from the text file to the string in the memory.
+  \item Print the string to the terminal in the following format:
+        \begin{enumerate}
+          \item -{}-{}-{}-{}-Student personal information-{}-{}-{}-{}-
+          \item Name: \textless name\textgreater
+          \item ID: \textless ID\textgreater
+          \item Address: \textless address\textgreater
+          \item Age: \textless age\textgreater
+          \item Religion: \textless religion\textgreater
+        \end{enumerate}
+        The output in the terminal for the former example input should be:\\
+        \texttt{-{}-{}-{}-{}-Student personal information-{}-{}-{}-{}-}\\
+        \texttt{Name: Davy Jones}\\
+        \texttt{ID: 2251234}\\
+        \texttt{Address: 168 Ly Thuong Kiet St District 10 Ward 14 HCMC}\\
+        \texttt{Age: 69}\\
+        \texttt{Religion: None}
+  \item The printed result should also be written in a file named
+        \texttt{formatted\_result.txt}
+\end{enumerate}
+\end{sloppypar}
+
+\task{Test cases}
+For each test case, \texttt{raw\_input.txt} is placed in the working directory of
+MARS. After the run, the content of \texttt{formatted\_result.txt} is the same as
+the terminal output.
+
+\begin{sloppypar}
+\testcase{3}{1}{\texttt{raw\_input.txt} contains\newline
+  \texttt{Davy Jones,2251234,168 Ly Thuong Kiet St District 10 Ward 14 HCMC,69,None}}%
+  {\newline
+  \texttt{-{}-{}-{}-{}-Student personal information-{}-{}-{}-{}-}\newline
+  \texttt{Name: Davy Jones}\newline
+  \texttt{ID: 2251234}\newline
+  \texttt{Address: 168 Ly Thuong Kiet St District 10 Ward 14 HCMC}\newline
+  \texttt{Age: 69}\newline
+  \texttt{Religion: None}}
+\testcase{3}{2}{\texttt{raw\_input.txt} contains\newline
+  \texttt{Nguyen Van An,2512345,268 Ly Thuong Kiet St Ward 14 District 10 HCMC,19,Buddhism}}%
+  {\newline
+  \texttt{-{}-{}-{}-{}-Student personal information-{}-{}-{}-{}-}\newline
+  \texttt{Name: Nguyen Van An}\newline
+  \texttt{ID: 2512345}\newline
+  \texttt{Address: 268 Ly Thuong Kiet St Ward 14 District 10 HCMC}\newline
+  \texttt{Age: 19}\newline
+  \texttt{Religion: Buddhism}}
+\testcase{3}{3}{\texttt{raw\_input.txt} contains (the line ends with a Windows line break \texttt{\textbackslash r\textbackslash n})\newline
+  \texttt{Tran Thi Bich Ngoc,2310001,1 Vo Van Ngan St Linh Chieu Ward Thu Duc City,21,Christianity}}%
+  {\newline
+  \texttt{-{}-{}-{}-{}-Student personal information-{}-{}-{}-{}-}\newline
+  \texttt{Name: Tran Thi Bich Ngoc}\newline
+  \texttt{ID: 2310001}\newline
+  \texttt{Address: 1 Vo Van Ngan St Linh Chieu Ward Thu Duc City}\newline
+  \texttt{Age: 21}\newline
+  \texttt{Religion: Christianity}}
+\end{sloppypar}

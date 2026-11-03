@@ -1,0 +1,6 @@
+-----Student personal information-----
+Name: Tran Thi Bich Ngoc
+ID: 2310001
+Address: 1 Vo Van Ngan St Linh Chieu Ward Thu Duc City
+Age: 21
+Religion: Christianity

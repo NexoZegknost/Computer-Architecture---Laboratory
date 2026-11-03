@@ -1,9 +1,33 @@
 % !TEX root = ../../main.tex
 \subsection{Exercise 1}
 \task{Requirement}
-State the requirement here.
+Write a MIPS program to find the solution to the equation:
+\begin{equation}
+  ax^2 + bx + c = 0
+\end{equation}
+where a, b, and c are floating-points number inserted by the user. The result
+should be in 1 of these 3 cases:
+\begin{itemize}
+  \item There are 2 solutions to x: print those results to the screen after the
+        text: ``x1 = '' and ``x2 = ''.
+  \item There is 1 solution to x: print the result after the text: ``There is one
+        solution, x = ''.
+  \item There is no real solution: print ``There is no real solution''.
+\end{itemize}
+Note that the solutions printed must be in floating-point numbers. The user
+will input the floating-points numbers after the prompts: ``Please insert a: '',
+``Please insert b: '', and ``Please insert c: ''.
+
+For example, if the user inserted \textbf{a=1.2, b=9.6, c=1} then the result
+should be: \textbf{x1 = -7.8944 and x2 = -0.1056}
+
+In another example, if the user inserted \textbf{a=2.4, b=-3.2, c=3.1} then the
+result should be: \textbf{There is no real solution}
 
 \task{Test cases}
-\testcase{1}{1}{\texttt{input}}{\texttt{expected output}}
-\testcase{1}{2}{\texttt{input}}{\texttt{expected output}}
-\testcase{1}{3}{\texttt{input}}{\texttt{expected output}}
+\testcase{1}{1}{$a = 1.2$, $b = 9.6$, $c = 1$}%
+  {\texttt{x1 = -7.89444}, \texttt{x2 = -0.10555982}}
+\testcase{1}{2}{$a = 1$, $b = -4$, $c = 4$}%
+  {\texttt{There is one solution, x = 2.0}}
+\testcase{1}{3}{$a = 2.4$, $b = -3.2$, $c = 3.1$}%
+  {\texttt{There is no real solution}}
