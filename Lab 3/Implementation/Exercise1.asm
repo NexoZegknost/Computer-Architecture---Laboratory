@@ -11,6 +11,9 @@ newline:    .asciiz "\n"
 zero:       .float 0.0
 two:        .float 2.0
 four:       .float 4.0
+dZero:      .double 0.0
+dHalf:      .double 0.5
+dScale:     .double 10000.0
 
 .text
 main:
@@ -60,8 +63,7 @@ main:
     li   $v0, 4
     la   $a0, msgX1
     syscall
-    li   $v0, 2
-    syscall
+    jal  print_float4
     li   $v0, 4
     la   $a0, newline
     syscall
@@ -71,8 +73,7 @@ main:
     li   $v0, 4
     la   $a0, msgX2
     syscall
-    li   $v0, 2
-    syscall
+    jal  print_float4
     j    exit
 
 one_solution:
@@ -86,12 +87,10 @@ linear:
     div.s $f12, $f12, $f21
 
 print_one:
-    add.s $f12, $f12, $f4
     li   $v0, 4
     la   $a0, msgOne
     syscall
-    li   $v0, 2
-    syscall
+    jal  print_float4
     j    exit
 
 degenerate:
@@ -110,3 +109,48 @@ no_solution:
 exit:
     li   $v0, 10
     syscall
+
+print_float4:
+    cvt.d.s $f0, $f12
+    li   $t9, 0
+    l.d  $f2, dZero
+    c.lt.d $f0, $f2
+    bc1f pf_round
+    neg.d $f0, $f0
+    li   $t9, 1
+pf_round:
+    l.d  $f2, dScale
+    mul.d $f0, $f0, $f2
+    l.d  $f2, dHalf
+    add.d $f0, $f0, $f2
+    floor.w.d $f4, $f0
+    mfc1 $t0, $f4
+    beq  $t9, $zero, pf_print
+    beq  $t0, $zero, pf_print
+    li   $v0, 11
+    li   $a0, 45
+    syscall
+pf_print:
+    li   $t1, 10000
+    div  $t0, $t1
+    mflo $t2
+    mfhi $t3
+    li   $v0, 1
+    move $a0, $t2
+    syscall
+    li   $v0, 11
+    li   $a0, 46
+    syscall
+    li   $v0, 11
+    li   $a0, 48
+    bge  $t3, 1000, pf_frac
+    syscall
+    bge  $t3, 100, pf_frac
+    syscall
+    bge  $t3, 10, pf_frac
+    syscall
+pf_frac:
+    li   $v0, 1
+    move $a0, $t3
+    syscall
+    jr   $ra

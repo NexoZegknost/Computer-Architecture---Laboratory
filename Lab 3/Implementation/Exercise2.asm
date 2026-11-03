@@ -7,11 +7,14 @@ promptC:    .asciiz "Please insert c: "
 promptD:    .asciiz "Please insert d: "
 promptE:    .asciiz "Please insert e: "
 msgResult:  .asciiz "Result: "
-msgZero:    .asciiz "The denominator d^4 + e^3 is zero, the integral can not be calculated."
+msgZero:    .asciiz "The denominator is zero, so the integral can not be calculated."
 zero:       .float 0.0
 two:        .float 2.0
 six:        .float 6.0
 seven:      .float 7.0
+dZero:      .double 0.0
+dHalf:      .double 0.5
+dScale:     .double 10000.0
 
 .text
 main:
@@ -56,14 +59,10 @@ main:
     sub.s $f28, $f28, $f0
 
     div.s $f12, $f28, $f27
-    l.s  $f8, zero
-    add.s $f12, $f12, $f8
-
     li   $v0, 4
     la   $a0, msgResult
     syscall
-    li   $v0, 2
-    syscall
+    jal  print_float4
     j    exit
 
 denominator_zero:
@@ -102,4 +101,49 @@ antiderivative:
 
     add.s $f0, $f8, $f6
     add.s $f0, $f0, $f4
+    jr   $ra
+
+print_float4:
+    cvt.d.s $f0, $f12
+    li   $t9, 0
+    l.d  $f2, dZero
+    c.lt.d $f0, $f2
+    bc1f pf_round
+    neg.d $f0, $f0
+    li   $t9, 1
+pf_round:
+    l.d  $f2, dScale
+    mul.d $f0, $f0, $f2
+    l.d  $f2, dHalf
+    add.d $f0, $f0, $f2
+    floor.w.d $f16, $f0
+    mfc1 $t0, $f16
+    beq  $t9, $zero, pf_print
+    beq  $t0, $zero, pf_print
+    li   $v0, 11
+    li   $a0, 45
+    syscall
+pf_print:
+    li   $t1, 10000
+    div  $t0, $t1
+    mflo $t2
+    mfhi $t3
+    li   $v0, 1
+    move $a0, $t2
+    syscall
+    li   $v0, 11
+    li   $a0, 46
+    syscall
+    li   $v0, 11
+    li   $a0, 48
+    bge  $t3, 1000, pf_frac
+    syscall
+    bge  $t3, 100, pf_frac
+    syscall
+    bge  $t3, 10, pf_frac
+    syscall
+pf_frac:
+    li   $v0, 1
+    move $a0, $t3
+    syscall
     jr   $ra
