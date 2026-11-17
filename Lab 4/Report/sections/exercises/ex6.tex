@@ -1,23 +1,8 @@
 % !TEX root = ../../main.tex
 \subsection{Exercise 6}
 \task{Requirement}
-Calculate the average CPI of a pipelined system, given that the miss rate of the
-instruction memory is 5\%, the miss rate of the data memory is 10\%. The program
-has 1000 instructions, 100 of which are load and store instructions. The miss
-penalty is 100 cycles.
-
-\task{Solution}
-The ideal pipeline has $\text{CPI}_{ideal} = 1$. Every instruction is fetched from
-the instruction memory, while only load/store instructions ($100/1000 = 10\%$)
-access the data memory.
-\begin{align*}
-  \text{Instruction miss stall} &= 0.05 \times 100 = 5 \text{ cycles/instr} \\
-  \text{Data miss stall}        &= \frac{100}{1000} \times 0.1 \times 100 = 1 \text{ cycle/instr} \\
-  \text{CPI}                    &= 1 + 5 + 1 = \mathbf{7}
-\end{align*}
-
-\task{Implementation}
-\lstinputlisting[caption={Exercise6.asm}]{Exercise6.asm}
+Tính CPI trung bình của hệ thống pipeline khi biết tỉ lệ miss của bộ nhớ lệnh là 5\%, tỉ lệ miss của bộ nhớ dữ liệu là 10\%.
+Biết đoạn chương trình có 1000 lệnh, trong đó có 100 lệnh là lệnh load và store. Thời gian miss penalty là 100 cycles.
 
 \task{Output}
 \screenshot{images/ex6.png}{Exercise 6 -- Output in MARS}

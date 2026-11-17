@@ -1,39 +1,13 @@
 % !TEX root = ../../main.tex
 \subsection{Exercise 2}
 \task{Requirement}
-The main memory has a total size of 256MB, the cache size is 256KB, one block is
-64 words and the access unit of the system is 2 bytes. Determine the tag, index
-and half-word offset for the following cache configurations:
-(a) Direct mapped, (b) 4-way set associative, (c) Fully associative.
-
-\task{Solution}
-\begin{itemize}[itemsep=2pt]
-  \item Number of addressable half-words: $256\text{MB}/2\text{B} = 2^{28}/2^{1} = 2^{27}$
-        $\Rightarrow$ address width is 27 bits.
-  \item Block size: $64 \times 4\text{B} = 256\text{B} = 128$ half-words $= 2^{7}$
-        $\Rightarrow$ half-word offset is 7 bits.
-  \item Number of blocks in cache: $256\text{KB}/256\text{B} = 2^{18}/2^{8} = 2^{10}$ blocks.
-  \item Tag $= 27 - \text{Index} - \text{Offset}$.
-\end{itemize}
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{lcccc}
-    \toprule
-    \textbf{Configuration} & \textbf{Sets} & \textbf{Tag} & \textbf{Index} & \textbf{Half-word offset} \\
-    \midrule
-    (a) Direct mapped           & $2^{10}$ & 10 & 10 & 7 \\
-    (b) 4-way set associative   & $2^{8}$  & 12 & 8  & 7 \\
-    (c) Fully associative       & $1$      & 20 & 0  & 7 \\
-    \bottomrule
-  \end{tabular}
-  \caption{Exercise 2 -- Address fields (bits)}
-\end{table}
-
-\task{Implementation}
-The program is the same as Exercise 1, except that the address width is computed
-as $\log_2(\text{memory size}/\text{unit})$ and the offset is counted in half-words.
-\lstinputlisting[caption={Exercise2.asm}]{Exercise2.asm}
+Cho bộ nhớ chính tổng dung lượng là 256MB, bộ nhớ cache có kích thước là 256KB, 1 block 64 words, đơn vị truy xuất của hệ thống là 2 byte.
+Xác định tag, index, half-word offset với cấu hình cache sau:
+\begin{enumerate}[label=(\alph*), itemsep=0pt]
+  \item Direct mapped
+  \item 4-way set associative
+  \item Fully associative
+\end{enumerate}
 
 \task{Output}
 \screenshot{images/ex2.png}{Exercise 2 -- Output in MARS}

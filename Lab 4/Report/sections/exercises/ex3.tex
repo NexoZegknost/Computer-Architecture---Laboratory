@@ -1,54 +1,14 @@
 % !TEX root = ../../main.tex
 \subsection{Exercise 3}
 \task{Requirement}
-Given the sequence of word addresses
-\texttt{0, 4, 1, 5, 65, 1, 67, 46, 1, 70, 2, 0}. The system has a 256-byte cache,
-4-word blocks and the access unit is one byte. Determine the number of HITs and
-MISSes for the following cache configurations:
-(a) Direct mapped, (b) 2-way set associative, (c) Fully associative.
-
-\task{Solution}
-\begin{itemize}[itemsep=2pt]
-  \item Block size $= 4$ words $= 16$ bytes; the cache has $256/16 = 16$ blocks.
-  \item Block ID $= \lfloor \text{word address} / 4 \rfloor$:
-        \texttt{0, 1, 0, 1, 16, 0, 16, 11, 0, 17, 0, 0}.
-  \item Set index $=$ Block ID $\bmod$ number of sets; LRU replacement is used.
-\end{itemize}
-
-\begin{table}[H]
-  \centering
-  \small
-  \begin{tabular}{lcccccccccccc}
-    \toprule
-    \textbf{Word address} & 0 & 4 & 1 & 5 & 65 & 1 & 67 & 46 & 1 & 70 & 2 & 0 \\
-    \textbf{Block ID}     & 0 & 1 & 0 & 1 & 16 & 0 & 16 & 11 & 0 & 17 & 0 & 0 \\
-    \midrule
-    (a) DM, 16 sets (index)  & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 11 & 0 & 1 & 0 & 0 \\
-    \quad Result             & M & M & H & H & M & M & M & M  & M & M & H & H \\
-    (b) 2-way, 8 sets (index)& 0 & 1 & 0 & 1 & 0 & 0 & 0 & 3  & 0 & 1 & 0 & 0 \\
-    \quad Result             & M & M & H & H & M & H & H & M  & H & M & H & H \\
-    (c) Fully associative    & M & M & H & H & M & H & H & M  & H & M & H & H \\
-    \bottomrule
-  \end{tabular}
-  \caption{Exercise 3 -- HIT (H) / MISS (M) of each access}
-\end{table}
-
-\begin{itemize}[itemsep=2pt]
-  \item (a) Direct mapped: blocks 0 and 16 both map to index 0 and keep evicting
-        each other $\Rightarrow$ \textbf{4 HITs, 8 MISSes}.
-  \item (b) 2-way set associative: blocks 0 and 16 fit in the two ways of set 0
-        $\Rightarrow$ \textbf{7 HITs, 5 MISSes}.
-  \item (c) Fully associative: only the 5 compulsory misses (blocks 0, 1, 16, 11, 17)
-        $\Rightarrow$ \textbf{7 HITs, 5 MISSes}.
-\end{itemize}
-
-\task{Implementation}
-The subroutine \texttt{sim} simulates a set-associative cache with LRU replacement.
-Each line stores the block ID (\texttt{-1} means invalid) and the time it was last
-used. For every access, the block ID and set index are computed, the ways of the set
-are searched; on a miss, the least recently used line (or an invalid line) is replaced.
-The routine is called with 1 way, 2 ways and 16 ways (fully associative).
-\lstinputlisting[caption={Exercise3.asm}]{Exercise3.asm}
+Cho dãy địa chỉ (words) sau: \texttt{0, 4, 1, 5, 65, 1, 67, 46, 1, 70, 2, 0}.
+Biết hệ thống có 256 Bytes cache, 4-word block, đơn vị truy xuất là byte.
+Xác định số lần HIT/MISS khi chạy chương trình trên với các cấu hình cache sau:
+\begin{enumerate}[label=(\alph*), itemsep=0pt]
+  \item Direct mapped
+  \item 2-way set associative
+  \item Fully associative
+\end{enumerate}
 
 \task{Output}
 \screenshot{images/ex3.png}{Exercise 3 -- Output in MARS}

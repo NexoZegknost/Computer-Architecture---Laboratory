@@ -1,20 +1,8 @@
 % !TEX root = ../../main.tex
 \subsection{Exercise 5}
 \task{Requirement}
-The hit time of L1 is 10 cycles, the hit time of L2 is 15 cycles and the access
-time of RAM (main memory) is 100 cycles. The miss rate of L1 is 20\% and the miss
-rate of L2 is 10\%. Determine the average memory access time of the system.
-
-\task{Solution}
-\begin{align*}
-  \text{Miss penalty}_{L1} &= \text{Hit time}_{L2} + \text{Miss rate}_{L2} \times \text{Time}_{RAM}
-                            = 15 + 0.1 \times 100 = 25 \text{ cycles} \\
-  \text{AMAT} &= \text{Hit time}_{L1} + \text{Miss rate}_{L1} \times \text{Miss penalty}_{L1}
-               = 10 + 0.2 \times 25 = \mathbf{15} \textbf{ cycles}
-\end{align*}
-
-\task{Implementation}
-\lstinputlisting[caption={Exercise5.asm}]{Exercise5.asm}
+Cho biết hit time của L1 là 10 cycles, hit time của L2 là 15 cycles, thời gian truy xuất của RAM (main memory) là 100 cycles. Tỉ lệ miss của L1 là 20\%, tỉ lệ miss của L2 là 10\%.
+Xác định thời gian truy xuất vùng nhớ trung bình của hệ thống trên.
 
 \task{Output}
 \screenshot{images/ex5.png}{Exercise 5 -- Output in MARS}
