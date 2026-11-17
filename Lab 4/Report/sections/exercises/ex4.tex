@@ -1,0 +1,35 @@
+% !TEX root = ../../main.tex
+\subsection{Exercise 4}
+\task{Requirement}
+Determine the average memory access time (AMAT) of the configurations in
+Exercise 3, given Hit time $= 5$ cycles, RAM access time $= 10$ ns and the clock
+frequency is 2GHz.
+
+\task{Solution}
+\begin{itemize}[itemsep=2pt]
+  \item Clock cycle $= 1/2\text{GHz} = 0.5$ ns $\Rightarrow$ Miss penalty $= 10/0.5 = 20$ cycles.
+  \item $\text{AMAT} = \text{Hit time} + \text{Miss rate} \times \text{Miss penalty}$.
+\end{itemize}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Configuration} & \textbf{Miss rate} & \textbf{AMAT (cycles)} & \textbf{AMAT (ns)} \\
+    \midrule
+    (a) Direct mapped         & $8/12$ & $5 + \frac{8}{12}\times 20 \approx 18.33$ & $\approx 9.17$ \\
+    (b) 2-way set associative & $5/12$ & $5 + \frac{5}{12}\times 20 \approx 13.33$ & $\approx 6.67$ \\
+    (c) Fully associative     & $5/12$ & $5 + \frac{5}{12}\times 20 \approx 13.33$ & $\approx 6.67$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{Exercise 4 -- AMAT}
+\end{table}
+
+\task{Implementation}
+The program reuses the cache simulator of Exercise 3 to obtain the number of misses,
+then uses single-precision floating-point instructions to compute the miss penalty,
+miss rate and AMAT (in cycles and in ns).
+\lstinputlisting[caption={Exercise4.asm}]{Exercise4.asm}
+
+\task{Output}
+\screenshot{images/ex4.png}{Exercise 4 -- Output in MARS}
